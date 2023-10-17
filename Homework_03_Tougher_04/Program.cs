@@ -21,25 +21,25 @@ var months = new (string month, int daysCount)[]
 
 Date trainDate = new Date(15, 6, 1994);
 int daysAdded = 100;
-Console.WriteLine($"After adding {daysAdded} days to the {SlashFormatted(trainDate)} date, ");
-AddDays(trainDate, daysAdded);
-Console.WriteLine($"the new date is: {SlashFormatted(trainDate)}");
+Console.WriteLine($"After adding {daysAdded} days to the {DateFunctions.SlashFormatted(trainDate)} date, ");
+DateFunctions.AddDays(trainDate, daysAdded);
+Console.WriteLine($"the new date is: {DateFunctions.SlashFormatted(trainDate)}");
 
 Console.WriteLine("\n");
 
 int monthsAdded = 2;
-Console.WriteLine($"After adding {monthsAdded} months to the {SlashFormatted(trainDate)} date, ");
-AddMonths(trainDate, monthsAdded);
-Console.WriteLine($"the new date is: {SlashFormatted(trainDate)}");
+Console.WriteLine($"After adding {monthsAdded} months to the {DateFunctions.SlashFormatted(trainDate)} date, ");
+DateFunctions.AddMonths(trainDate, monthsAdded);
+Console.WriteLine($"the new date is: {DateFunctions.SlashFormatted(trainDate)}");
 
 Console.WriteLine("\n");
 
 int yearsAdded = 3;
-Console.WriteLine($"After adding {yearsAdded} years to the {SlashFormatted(trainDate)} date, ");
-AddYears(trainDate, yearsAdded);
-Console.WriteLine($"the new date is: {SlashFormatted(trainDate)}");
+Console.WriteLine($"After adding {yearsAdded} years to the {DateFunctions.SlashFormatted(trainDate)} date, ");
+DateFunctions.AddYears(trainDate, yearsAdded);
+Console.WriteLine($"the new date is: {DateFunctions.SlashFormatted(trainDate)}");
 
-Console.WriteLine("\n" + SlashFormatted(trainDate));
+Console.WriteLine("\n" + DateFunctions.SlashFormatted(trainDate));
 
 //Console.WriteLine("\n" + NicelyFormatted(trainDate));
 
@@ -50,42 +50,42 @@ Console.WriteLine("\n" + SlashFormatted(trainDate));
 //}
 static class DateFunctions
 {
-    static string SlashFormatted(Date date)
+    public static string SlashFormatted(Date date)
     {
         return $"{date.Day}/{date.Month}/{date.Year}";
     }
-    static Date AddYears(Date date, int yearsToAdd)
+    public static Date AddYears(Date date, int yearsToAdd)
     {
         date.Year += yearsToAdd;
         return date;
     }
 
-    static Date AddMonths(Date date, int monthsToAdd)
+    public static Date AddMonths(Date date, int monthsToAdd)
     {
         date.Month += monthsToAdd;
         return date;
     }
 
-    static Date AddDays(Date date, int daysToAdd)
+    public static Date AddDays(Date date, int daysToAdd)
     {
         if (daysToAdd <= 0 || date is null)
         {
             Console.WriteLine("Wrong arguments used. Please try again ;(");
         }
         int currentMonth = date.Month - 1;
-        if (date.Day + daysToAdd <= months[currentMonth].daysCount)
+        if (date.Day + daysToAdd <= date.Months[currentMonth].daysCount)
         {
             date.Day += daysToAdd;
         }
         else
         {
             int daysLeft = daysToAdd;
-            daysLeft -= months[currentMonth].daysCount - date.Day + 1;
+            daysLeft -= date.Months[currentMonth].daysCount - date.Day + 1;
             date.Day = 1;
             currentMonth++;
-            while (daysLeft > months[currentMonth].daysCount)
+            while (daysLeft > date.Months[currentMonth].daysCount)
             {
-                daysLeft = daysLeft - months[currentMonth].daysCount;
+                daysLeft = daysLeft - date.Months[currentMonth].daysCount;
                 currentMonth++;
             }
             date.Day += daysLeft;
