@@ -1,11 +1,4 @@
 ﻿
-
-
-
-
-
-
-
 static class DateFunctions
 {
     public static string SlashFormatted(Date date)
