@@ -1,6 +1,12 @@
 ﻿
 static class DateFunctions
 {
+    //Two ways of formatting the date for an output.
+    public static string StringFormatted(Date date)
+    {
+        return $"{date.Day} {MonthsArray.Months[date.Month - 1].month} {date.Year}";
+
+    }
     public static string SlashFormatted(Date date)
     {
         return $"{date.Day}/{date.Month}/{date.Year}";
@@ -11,6 +17,7 @@ static class DateFunctions
         return date;
     }
 
+    //Adding days, months or years to a date
     public static Date AddMonths(Date date, int monthsToAdd)
     {
         int monthsSum = date.Month + monthsToAdd;
@@ -55,7 +62,7 @@ static class DateFunctions
             
             while (daysLeft > MonthsArray.Months[currentMonth].daysCount)
             {
-                daysLeft = daysLeft - MonthsArray.Months[currentMonth].daysCount;
+                daysLeft -= MonthsArray.Months[currentMonth].daysCount;
                 currentMonth++;
                 yearUpdater() ;
             }

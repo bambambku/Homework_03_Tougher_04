@@ -1,11 +1,4 @@
-﻿
-
-
-
-
-
-
-
+﻿// class used to check a number of days in each month, months name as a string and reset the leap year adjustment
 static class MonthsArray
 {
     public static(string month, int daysCount)[] Months =
